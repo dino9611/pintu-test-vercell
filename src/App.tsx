@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import viteLogo from '/vite.svg';
 import './App.css';
-import reactLogo from './assets/react.svg';
-import { useMergedata } from './hooks/useMergeData';
+import HomePage from './pages/HomePage';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const { mergeData } = useMergedata();
+  // const [count, setCount] = useState(0);
+  // const { mergeData } = useMergedata();
 
-  return <></>;
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }
 
 export default App;

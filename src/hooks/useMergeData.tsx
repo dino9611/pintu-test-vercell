@@ -11,6 +11,7 @@ interface IMergeData {
   day?: number;
   week?: number;
   month?: number;
+  color?: string;
   year?: number;
 }
 
@@ -24,6 +25,7 @@ const mergeFunction = (
   const excludeIRP = supportedCurrencies?.filter(
     (val) => val.currencySymbol != 'Rp',
   );
+
   const mergeData = excludeIRP?.map((suppCurr) => {
     const price = priceChange?.find((price) => {
       const reg = new RegExp(`^${suppCurr.currencySymbol}/idr$`, 'gi');
@@ -32,6 +34,7 @@ const mergeFunction = (
     return {
       name: suppCurr.name,
       logo: suppCurr.logo,
+      color: suppCurr.color,
       currencySymbol: suppCurr.currencySymbol,
       latestPrice: price?.latestPrice,
       day: price?.day,
@@ -44,14 +47,24 @@ const mergeFunction = (
   return mergeData;
 };
 
+// const topMovers =
+
 export const useMergedata = () => {
   const [mergeData, setMergeData] = useState<IMergeData[]>([]);
+  const [mergeDataPrev, setMergePrevData] = useState<IMergeData[]>([]);
+  // const [topMovers, setTopMovers] = useState<IMergeData[]>([]);/
+
   const { data: priceChange } = usePriceChangeData();
   const { data: supportedCurrencies } = useSuppCurrData();
 
   useEffect(() => {
+    if (mergeDataPrev.length) {
+      setMergePrevData(mergeData);
+    }
     setMergeData(mergeFunction(priceChange, supportedCurrencies));
+    // setTopMovers(mergeFunction(priceChange, supportedCurrencies));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [priceChange, supportedCurrencies]);
 
-  return { mergeData };
+  return { mergeData, mergeDataPrev };
 };
