@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes more-anime {
+  0% {
+    color: inherit;
+  }
+  50% {
+    color: rgb(0, 255, 30);
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+@keyframes less-anime {
+  0% {
+    color: inherit;
+  }
+  50% {
+    color: rgb(255, 0, 55);
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+.more {
+  animation: more-anime;
+  animation-duration: 2s;
+}
+
+.less {
+  animation: less-anime;
+  animation-duration: 2s;
+}

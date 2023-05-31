@@ -3,6 +3,12 @@ import { IPriceChange, ISuppCurrencies } from 'src/services';
 import { usePriceChangeData } from './usePriceChangeData';
 import { useSuppCurrData } from './useSupCurrData';
 
+export enum ChangePrice {
+  stay = 'STAY',
+  more = 'MORE',
+  less = 'LESS',
+}
+
 interface IMergeData {
   name?: string;
   logo?: string;
@@ -15,22 +21,40 @@ interface IMergeData {
   year?: number;
 }
 
+interface IMergeDataFinal extends IMergeData {
+  change?: ChangePrice;
+}
+
+const selectChange = (prevdata?: number, newData?: number) => {
+  if (!prevdata || !newData) {
+    return ChangePrice.stay;
+  }
+  if (prevdata > newData) {
+    return ChangePrice.less;
+  }
+  if (prevdata < newData) {
+    return ChangePrice.more;
+  }
+  return ChangePrice.stay;
+};
+
 const mergeFunction = (
   priceChange?: IPriceChange[],
   supportedCurrencies?: ISuppCurrencies[],
-): IMergeData[] => {
+  mergeDataPrev?: IMergeDataFinal[],
+): IMergeDataFinal[] => {
   if (!supportedCurrencies) {
     return [];
   }
-  const excludeIRP = supportedCurrencies?.filter(
-    (val) => val.currencySymbol != 'Rp',
-  );
-
-  const mergeData = excludeIRP?.map((suppCurr) => {
+  const mergeData = supportedCurrencies?.map((suppCurr) => {
     const price = priceChange?.find((price) => {
       const reg = new RegExp(`^${suppCurr.currencySymbol}/idr$`, 'gi');
       return price.pair.match(reg);
     });
+    const prevData = mergeDataPrev?.find((data) => {
+      return suppCurr.name === data.name;
+    });
+    const changePrice = selectChange(prevData?.latestPrice, price?.latestPrice);
     return {
       name: suppCurr.name,
       logo: suppCurr.logo,
@@ -41,6 +65,7 @@ const mergeFunction = (
       week: price?.week,
       month: price?.month,
       year: price?.year,
+      change: changePrice,
     };
   });
 
@@ -50,18 +75,20 @@ const mergeFunction = (
 // const topMovers =
 
 export const useMergedata = () => {
-  const [mergeData, setMergeData] = useState<IMergeData[]>([]);
-  const [mergeDataPrev, setMergePrevData] = useState<IMergeData[]>([]);
+  const [mergeData, setMergeData] = useState<IMergeDataFinal[]>([]);
+  const [mergeDataPrev, setMergePrevData] = useState<IMergeDataFinal[]>([]);
   // const [topMovers, setTopMovers] = useState<IMergeData[]>([]);/
 
   const { data: priceChange } = usePriceChangeData();
   const { data: supportedCurrencies } = useSuppCurrData();
 
   useEffect(() => {
-    if (mergeDataPrev.length) {
+    if (mergeData.length) {
       setMergePrevData(mergeData);
     }
-    setMergeData(mergeFunction(priceChange, supportedCurrencies));
+    setMergeData(
+      mergeFunction(priceChange, supportedCurrencies, mergeDataPrev),
+    );
     // setTopMovers(mergeFunction(priceChange, supportedCurrencies));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [priceChange, supportedCurrencies]);

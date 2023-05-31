@@ -1,10 +1,20 @@
-import { useMergedata } from 'src/hooks';
+import { ChangePrice, useMergedata } from 'src/hooks';
 import { formatRupiah } from 'src/utils/formatRp';
 import PercentageData from '../PercentageData';
 import CryptLogo from '../CryptLogo';
 
 function TableBody() {
   const { mergeData } = useMergedata();
+
+  const chooseAnimaClassName = (change?: ChangePrice): string => {
+    if (change === ChangePrice.less) {
+      return `font-bold less`;
+    }
+    if (change === ChangePrice.more) {
+      return `font-bold more`;
+    }
+    return `font-bold`;
+  };
 
   return (
     <tbody>
@@ -18,7 +28,9 @@ function TableBody() {
               <div className="font-bold ">{val.name}</div>
               <div className="text-slate-500 text-lg">{val.currencySymbol}</div>
             </td>
-            <td className="font-bold">{formatRupiah(val.latestPrice)}</td>
+            <td className={chooseAnimaClassName(val.change)}>
+              {formatRupiah(val.latestPrice)}
+            </td>
             <PercentageData data={val.day} />
             <PercentageData data={val.week} />
             <PercentageData data={val.month} />
