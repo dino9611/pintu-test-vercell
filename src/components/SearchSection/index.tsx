@@ -6,7 +6,7 @@ const SearchSection: React.FC = () => {
   return (
     <section className="flex justify-between my-5">
       <h1 className="font-bold xs:text-2xl md:text-3xl">
-        Harga Crrypto Dalam Rupiah Hari Ini
+        Harga Crypto Dalam Rupiah Hari Ini
       </h1>
       <div className="w-1/3">
         <input
