@@ -15,7 +15,7 @@ function TableBody() {
     }
     return `font-bold`;
   };
-
+  console.log('table-body');
   return (
     <tbody>
       {mergeData.map((val) => {

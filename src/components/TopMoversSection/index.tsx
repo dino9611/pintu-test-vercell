@@ -4,6 +4,8 @@ import TopMoversItem from '../TopMoversItem';
 
 const TopMovers: React.FC = () => {
   const { TopMovers } = useTopMoversdata();
+  // console.log('topMover');
+
   return (
     <div className="my-5">
       <h2 className="font-bold  xs:text-base md:text-lg">
