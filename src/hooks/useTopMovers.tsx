@@ -16,7 +16,6 @@ export const useTopMoversdata = () => {
 
   useEffect(() => {
     setTopMovers(mergeFunction(mergeData));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mergeData]);
 
   return { TopMovers };

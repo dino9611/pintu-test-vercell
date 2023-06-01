@@ -16,7 +16,12 @@ const PercentageData: React.FC<
         : 'text-red-500 ' + className;
     return 'text-inherit ' + className;
   };
-  return <Component className={colorText(data)}>{data + ' %'}</Component>;
+  return (
+    <Component className={colorText(data)}>
+      {data && data > 0 ? '+' : ''}
+      {data + ' %'}
+    </Component>
+  );
 };
 
 export default PercentageData;

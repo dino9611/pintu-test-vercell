@@ -4,7 +4,7 @@ import TopMoversItem from '../TopMoversItem';
 
 const TopMovers: React.FC = () => {
   const { TopMovers } = useTopMoversdata();
-  // console.log('topMover');
+  console.log('topMover');
 
   return (
     <div className="my-5">

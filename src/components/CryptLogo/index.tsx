@@ -9,7 +9,7 @@ const CryptLogo: React.FC<CryptLogoProps> = ({ url, color }) => {
   if (!url) return null;
   return (
     <ReactSVG
-      // className="flex justify-center"
+      className="flex pl-3 md:pl-0 md:justify-center"
       src={url}
       beforeInjection={(svg) => {
         svg.setAttribute('height', '40');
