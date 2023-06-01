@@ -1,9 +1,14 @@
-import { ChangePrice, useMergedata } from 'src/hooks';
+import React from 'react';
+import { ChangePrice, IMergeData, useMergedata } from 'src/hooks';
 import { formatRupiah } from 'src/utils/formatRp';
-import PercentageData from '../PercentageData';
-import CryptLogo from '../CryptLogo';
+import PercentageData from 'src/components/PercentageData';
+import CryptLogo from 'src/components/CryptLogo';
 
-function TableBody() {
+interface TableBodyProps {
+  filter: string;
+}
+
+const TableBody: React.FC<TableBodyProps> = ({ filter }) => {
   const { mergeData } = useMergedata();
 
   const chooseAnimaClassName = (change?: ChangePrice): string => {
@@ -14,6 +19,22 @@ function TableBody() {
       return `text-sm md:text-base font-bold more`;
     }
     return `text-sm md:text-base font-bold`;
+  };
+
+  const renderDataMobile = (val: IMergeData) => {
+    if (filter === 'day') {
+      return <PercentageData data={val.day} tag="div" className="text-end" />;
+    }
+    if (filter === 'week') {
+      return <PercentageData data={val.week} tag="div" className="text-end" />;
+    }
+
+    if (filter === 'month') {
+      return <PercentageData data={val.month} tag="div" className="text-end" />;
+    }
+    if (filter === 'year') {
+      return <PercentageData data={val.year} tag="div" className="text-end" />;
+    }
   };
 
   return (
@@ -42,7 +63,7 @@ function TableBody() {
               <div className={chooseAnimaClassName(val.change) + ' text-end'}>
                 {formatRupiah(val.latestPrice)}
               </div>
-              <PercentageData data={val.day} tag="div" className="text-end" />
+              {renderDataMobile(val)}
             </td>
             {/* mobile */}
             <PercentageData data={val.day} className="hidden md:table-cell" />
@@ -54,6 +75,6 @@ function TableBody() {
       })}
     </tbody>
   );
-}
+};
 
 export default TableBody;
