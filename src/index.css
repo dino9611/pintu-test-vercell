@@ -5,4 +5,5 @@
   padding: 0;
   color-scheme: normal;
   min-height: 100vh;
+  box-sizing: border-box;
 }

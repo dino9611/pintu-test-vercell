@@ -20,7 +20,7 @@ function TableBody() {
     <tbody>
       {mergeData.map((val) => {
         return (
-          <tr>
+          <tr key={val.name}>
             <td className="p-0">
               <CryptLogo url={val.logo} color={val.color} />
             </td>

@@ -9,7 +9,7 @@ export enum ChangePrice {
   less = 'LESS',
 }
 
-interface IMergeData {
+export interface IMergeData {
   name?: string;
   logo?: string;
   currencySymbol?: string;
@@ -72,12 +72,9 @@ const mergeFunction = (
   return mergeData;
 };
 
-// const topMovers =
-
 export const useMergedata = () => {
   const [mergeData, setMergeData] = useState<IMergeDataFinal[]>([]);
   const [mergeDataPrev, setMergePrevData] = useState<IMergeDataFinal[]>([]);
-  // const [topMovers, setTopMovers] = useState<IMergeData[]>([]);/
 
   const { data: priceChange } = usePriceChangeData();
   const { data: supportedCurrencies } = useSuppCurrData();
@@ -89,9 +86,8 @@ export const useMergedata = () => {
     setMergeData(
       mergeFunction(priceChange, supportedCurrencies, mergeDataPrev),
     );
-    // setTopMovers(mergeFunction(priceChange, supportedCurrencies));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [priceChange, supportedCurrencies]);
+  }, [priceChange]);
 
   return { mergeData, mergeDataPrev };
 };

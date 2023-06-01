@@ -1,5 +1,5 @@
 import TableHead from 'src/components/TableHead';
-import TableBody from '../TableBody';
+import TableBody from 'src/components/TableBody';
 
 const Table = () => {
   return (
