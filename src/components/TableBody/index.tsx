@@ -22,19 +22,19 @@ const TableBody: React.FC<TableBodyProps> = ({ filter }) => {
   };
 
   const renderDataMobile = (val: IMergeData) => {
-    if (filter === 'day') {
-      return <PercentageData data={val.day} tag="div" className="text-end" />;
-    }
+    let data = val.day;
+
     if (filter === 'week') {
-      return <PercentageData data={val.week} tag="div" className="text-end" />;
+      data = val.week;
     }
 
     if (filter === 'month') {
-      return <PercentageData data={val.month} tag="div" className="text-end" />;
+      data = val.month;
     }
     if (filter === 'year') {
-      return <PercentageData data={val.year} tag="div" className="text-end" />;
+      data = val.year;
     }
+    return <PercentageData data={data} tag="div" className="text-end" />;
   };
 
   return (

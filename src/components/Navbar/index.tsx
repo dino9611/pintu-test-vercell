@@ -1,11 +1,9 @@
 import React from 'react';
 import NavLink from '../NavLink';
 
-// type NavbarProps = {};
-
 const Navbar: React.FC = () => {
   return (
-    <nav className="h-[8vh] py-5  flex justify-between">
+    <nav className="h-[8vh] py-5 flex justify-between">
       <h1 className="font-bold text-2xl tracking-widest">PINTU</h1>
       <div className="space-x-20 hidden md:flex">
         <NavLink>Fitur</NavLink>

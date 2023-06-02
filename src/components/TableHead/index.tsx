@@ -17,7 +17,7 @@ const TableHead: React.FC<TableHeadProps> = ({ filter, handleFilter }) => {
           <select
             value={filter}
             onChange={handleFilter}
-            className="select select-bordered "
+            className="select select-bordered"
           >
             <option value="day">24 Jam</option>
             <option value="week">1 MGG</option>
