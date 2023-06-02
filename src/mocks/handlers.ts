@@ -3,7 +3,7 @@ import { rest } from 'msw';
 const responseSuppCurr = {
   code: 'success',
   message: '',
-  paylaod: [
+  payload: [
     {
       currencyGroup: 'BTC',
       color: '#F78B1A',
