@@ -1,8 +1,8 @@
 import React from 'react';
 
-interface TagItemProps {
+type TagItemProps = {
   data: string;
-}
+};
 
 const TagItem: React.FC<TagItemProps> = ({ data }) => {
   return (

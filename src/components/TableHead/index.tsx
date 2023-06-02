@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface TableHeadProps {
+type TableHeadProps = {
   filter: string;
   handleFilter: React.ChangeEventHandler<HTMLSelectElement>;
-}
+};
 
 const TableHead: React.FC<TableHeadProps> = ({ filter, handleFilter }) => {
   return (

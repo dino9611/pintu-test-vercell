@@ -1,9 +1,9 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
-interface CryptLogoProps {
+type CryptLogoProps = {
   url?: string;
   color?: string;
-}
+};
 
 const CryptLogo: React.FC<CryptLogoProps> = ({ url, color }) => {
   if (!url) return null;

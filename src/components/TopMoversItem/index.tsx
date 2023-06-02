@@ -4,9 +4,9 @@ import CryptLogo from 'src/components/CryptLogo';
 import { formatRupiah } from 'src/utils/formatRp';
 import PercentageData from '../PercentageData';
 
-interface TopMoversItemProps {
+type TopMoversItemProps = {
   data?: IMergeData;
-}
+};
 
 const TopMoversItem: React.FC<TopMoversItemProps> = ({ data }) => {
   return (

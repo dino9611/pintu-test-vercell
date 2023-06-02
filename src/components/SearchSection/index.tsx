@@ -1,7 +1,5 @@
 import React from 'react';
 
-// type SearchSectionProps = {};
-
 const SearchSection: React.FC = () => {
   return (
     <section className="flex justify-between my-5">
