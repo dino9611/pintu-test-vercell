@@ -6,8 +6,6 @@ import TagSection from 'src/components/TagSection';
 import TopMovers from 'src/components/TopMoversSection';
 
 function HomePage() {
-  // const { mergeData, mergeDataPrev } = useMergedata();
-
   return (
     <Layout>
       <Navbar />

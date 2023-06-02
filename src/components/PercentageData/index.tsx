@@ -17,7 +17,7 @@ const PercentageData: React.FC<
     return 'text-inherit ' + className;
   };
   return (
-    <Component className={colorText(data)}>
+    <Component data-testid="data" className={colorText(data)}>
       {data && data > 0 ? '+' : ''}
       {data + ' %'}
     </Component>

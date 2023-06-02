@@ -60,7 +60,10 @@ const TableBody: React.FC<TableBodyProps> = ({ filter }) => {
             </td>
             {/* mobile */}
             <td className="table-cell md:hidden">
-              <div className={chooseAnimaClassName(val.change) + ' text-end'}>
+              <div
+                data-testid="animate"
+                className={chooseAnimaClassName(val.change) + ' text-end'}
+              >
                 {formatRupiah(val.latestPrice)}
               </div>
               {renderDataMobile(val)}

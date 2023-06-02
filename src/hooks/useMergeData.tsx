@@ -39,15 +39,15 @@ const selectChange = (prevdata?: number, newData?: number) => {
 };
 
 const mergeFunction = (
-  priceChange?: IPriceChange[],
-  supportedCurrencies?: ISuppCurrencies[],
+  priceChange: IPriceChange[],
+  supportedCurrencies: ISuppCurrencies[],
   mergeDataPrev?: IMergeDataFinal[],
 ): IMergeDataFinal[] => {
   if (!supportedCurrencies) {
     return [];
   }
-  const mergeData = supportedCurrencies?.map((suppCurr) => {
-    const price = priceChange?.find((price) => {
+  const mergeData = supportedCurrencies.map((suppCurr) => {
+    const price = priceChange.find((price) => {
       const reg = new RegExp(`^${suppCurr.currencySymbol}/idr$`, 'gi');
       return price.pair.match(reg);
     });
@@ -76,8 +76,8 @@ export const useMergedata = () => {
   const [mergeData, setMergeData] = useState<IMergeDataFinal[]>([]);
   const [mergeDataPrev, setMergePrevData] = useState<IMergeDataFinal[]>([]);
 
-  const { data: priceChange } = usePriceChangeData();
-  const { data: supportedCurrencies } = useSuppCurrData();
+  const { data: priceChange = [] } = usePriceChangeData();
+  const { data: supportedCurrencies = [] } = useSuppCurrData();
 
   useEffect(() => {
     if (mergeData.length) {
